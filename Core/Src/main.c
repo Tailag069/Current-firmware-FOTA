@@ -99,13 +99,13 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  if(HAL_UART_Receive(&huart4, &rxData, 3, 300)==HAL_OK){
-		if(rxData == "Rbt"){
+	  if(HAL_UART_Receive(&huart4, &rxData, 3, 100)==HAL_OK){
+		  if(memcmp(rxData,"Rbt",3)==0){
 			  HAL_UART_Transmit(&huart4, &back, strlen(back), 300);
-			     HAL_RCC_DeInit();
+			  HAL_RCC_DeInit();
 
-			     /* Clear Pending Interrupt Request, turn  off System Tick*/
-			     HAL_DeInit();
+			  /* Clear Pending Interrupt Request, turn  off System Tick*/
+			  HAL_DeInit();
 			  SCB->SHCSR &= ~( SCB_SHCSR_USGFAULTENA_Msk |\
 			       SCB_SHCSR_BUSFAULTENA_Msk | \
 			       SCB_SHCSR_MEMFAULTENA_Msk ) ;
@@ -114,10 +114,10 @@ int main(void)
 			  pFunction app_reset_handler = (pFunction)(*(__IO uint32_t*)(0x08000000 + 4));
 			  __set_MSP(*(__IO uint32_t*)0x08000000);
 			  app_reset_handler();
-		}
-		if(rxData == "1"){
-			HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
-		}
+		  }
+		  if(memcmp(rxData,"111",3)==0){
+			  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
+		  }
 	  }
 //	  HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
 //	  HAL_Delay(500);
