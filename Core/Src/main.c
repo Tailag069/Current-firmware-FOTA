@@ -42,7 +42,7 @@ typedef void (*pFunction)(void);
  UART_HandleTypeDef huart4;
 
 /* USER CODE BEGIN PV */
-uint8_t Mode[]= "Dang chay current firware\r\n";
+uint8_t Mode[]= "Dang chay current firmware\r\n";
 uint8_t rxData[3];
 uint8_t txData[] =  "Current firmware send data\r\n";
 uint8_t back[] = "Tro ve bootloader\r\n";
